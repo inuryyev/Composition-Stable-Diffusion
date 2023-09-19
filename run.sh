@@ -1,6 +1,6 @@
 export MODEL_NAME="runwayml/stable-diffusion-inpainting"
 export INSTANCE_DIR="data/sofa"
-export Test_DIR="data/sofa_test"
+export TEST_DIR="data/sofa_test"
 export OUT_DIR="out/sofa"
 export INSTANCE_PROMPT="sofa"
 export MODEL_DIR="logs/sofa"
@@ -23,7 +23,7 @@ accelerate launch --num_processes 1 train.py \
   --lr_warmup_steps=0 \
   --max_train_steps=1000
 
-python inference.py --image_path $Test_DIR \
+python inference.py --image_path $TEST_DIR \
                     --model_path $MODEL_DIR \
                     --out_path $OUT_DIR \
                     --instance_prompt $INSTANCE_PROMPT

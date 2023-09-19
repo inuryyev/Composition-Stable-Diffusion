@@ -38,7 +38,6 @@ from diffusers import (
 from diffusers.optimization import get_scheduler
 from diffusers.utils import check_min_version
 
-
 # Will error if the minimal version of diffusers is not installed. Remove at your own risks.
 check_min_version("0.13.0.dev0")
 
@@ -271,12 +270,12 @@ class DreamBoothDataset(Dataset):
     """
 
     def __init__(
-        self,
-        instance_data_root,
-        instance_prompt,
-        tokenizer,
-        size=512,
-        center_crop=False,
+            self,
+            instance_data_root,
+            instance_prompt,
+            tokenizer,
+            size=512,
+            center_crop=False,
     ):
         self.size = size
         self.center_crop = center_crop
@@ -319,15 +318,16 @@ class DreamBoothDataset(Dataset):
         example["instance_images"] = self.image_transforms(instance_image)
 
         # mask
-        instance_mask = Image.open(self.instance_images_path[index % self.num_instance_images].with_suffix('.png')).resize(instance_image.size)
+        instance_mask = Image.open(
+            self.instance_images_path[index % self.num_instance_images].with_suffix('.png')).resize(instance_image.size)
         instance_mask = instance_mask.filter(ImageFilter.MaxFilter(21))
         if not instance_mask.mode == "RGB":
             instance_mask = instance_mask.convert("RGB")
         instance_mask = self.image_transforms_resize_and_crop(instance_mask)
         example["PIL_masks"] = instance_mask
         example["instance_masks"] = self.image_transforms(instance_mask)
-        
-        instance_prompt = 'a photo with sks ' +  self.instance_prompt
+
+        instance_prompt = 'a photo with sks ' + self.instance_prompt
 
         example["instance_prompt_ids"] = self.tokenizer(
             instance_prompt,
@@ -374,7 +374,7 @@ def main():
         gradient_accumulation_steps=args.gradient_accumulation_steps,
         mixed_precision=args.mixed_precision,
         log_with="tensorboard",
-        logging_dir=logging_dir,
+        project_dir=logging_dir,
     )
 
     # Currently, it's not possible to do gradient accumulation when training two models with accelerate.accumulate
@@ -429,7 +429,7 @@ def main():
 
     if args.scale_lr:
         args.learning_rate = (
-            args.learning_rate * args.gradient_accumulation_steps * args.train_batch_size * accelerator.num_processes
+                args.learning_rate * args.gradient_accumulation_steps * args.train_batch_size * accelerator.num_processes
         )
 
     # Use 8-bit Adam for lower memory usage or to fine-tune the model in 16GB GPUs
