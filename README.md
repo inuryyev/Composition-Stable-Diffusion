@@ -47,7 +47,7 @@ For example, images in ./data/sofa
 ```bash
 export MODEL_NAME="runwayml/stable-diffusion-inpainting"
 export INSTANCE_DIR="data/sofa"
-export Test_DIR="data/sofa_test"
+export TEST_DIR="data/sofa_test"
 export MODEL_DIR="logs/sofa"
 export OUT_DIR="out/sofa"
 export INSTANCE_PROMPT="sofa"
