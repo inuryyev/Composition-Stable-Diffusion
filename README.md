@@ -84,7 +84,7 @@ accelerate launch --num_processes 1 train.py \
 Finally, you can provide new images to achieve image composition.
 
 ```bash
-python inference.py --image_path $Test_DIR \
+python inference.py --image_path $TEST_DIR \
                     --model_path $MODEL_DIR \
                     --out_path $OUT_DIR \
                     --instance_prompt $INSTANCE_PROMPT
