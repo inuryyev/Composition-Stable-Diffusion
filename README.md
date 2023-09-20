@@ -25,7 +25,9 @@
 conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch 
 pip install -r requirements.txt
 ```
-
+  ```bash
+export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION="python"
+  ```
 * Initialize an [🤗Accelerate](https://github.com/huggingface/accelerate/) environment with
   ```bash
   accelerate config default
@@ -49,6 +51,7 @@ export Test_DIR="data/sofa_test"
 export MODEL_DIR="logs/sofa"
 export OUT_DIR="out/sofa"
 export INSTANCE_PROMPT="sofa"
+
 ```
 
 ### 2. Preprocess Images
